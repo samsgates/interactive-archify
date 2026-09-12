@@ -4,6 +4,8 @@
 
 AI-powered interactive architecture storytelling. Turn system prompts and codebases into animated, explorable, narrated and evidence-backed architecture.
 
+![Interactive Archify features overview](media_resources/features.png)
+
 ## What it includes
 
 - Interactive Architecture Model (IAM), renderer-independent source of truth
@@ -22,7 +24,13 @@ AI-powered interactive architecture storytelling. Turn system prompts and codeba
 - Installable AI skill under `skills/interactive-archify`
 - Dark, responsive technical UI
 
+## How it works
+
+![Interactive Archify workflow from input to export](media_resources/howitsworks.png)
+
 ## Architecture
+
+![Interactive Archify high-level architecture](media_resources/architech_diagram.png)
 
 ```text
 Prompt / Repository
