@@ -1,0 +1,29 @@
+{
+  "name": "interactive-archify",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-powered interactive architecture storytelling. Architecture that explains itself.",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @interactive-archify/web dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "node --test tests/*.test.mjs",
+    "cli": "pnpm --filter @interactive-archify/cli start",
+    "validate:examples": "node scripts/validate-examples.mjs"
+  },
+  "keywords": [
+    "architecture",
+    "architecture-diagram",
+    "ai",
+    "ai-agent",
+    "system-design",
+    "interactive-diagram",
+    "software-architecture"
+  ]
+}

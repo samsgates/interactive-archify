@@ -1,0 +1,19 @@
+{
+  "name": "@interactive-archify/story-runtime",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@interactive-archify/core": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "node -e \"console.log('package tests covered by root suite')\""
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

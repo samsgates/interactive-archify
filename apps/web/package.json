@@ -1,0 +1,31 @@
+{
+  "name": "@interactive-archify/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "node -e \"console.log('web smoke tests covered by root suite')\""
+  },
+  "dependencies": {
+    "next": "^15.1.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@interactive-archify/core": "workspace:*",
+    "@interactive-archify/ai": "workspace:*",
+    "@interactive-archify/repo-analyzer": "workspace:*",
+    "@interactive-archify/story-engine": "workspace:*",
+    "@interactive-archify/exporters": "workspace:*",
+    "@interactive-archify/renderer-runtime": "workspace:*",
+    "@interactive-archify/narration": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.3",
+    "@types/react-dom": "^19.0.2"
+  }
+}

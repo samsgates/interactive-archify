@@ -1,0 +1,2 @@
+import { NextResponse } from 'next/server'; import { askArchitecture, createProvider } from '@interactive-archify/ai';
+export async function POST(req:Request){try{const body=await req.json();const result=await askArchitecture(body.iam,String(body.question??''),createProvider());return NextResponse.json(result)}catch(e){return NextResponse.json({error:e instanceof Error?e.message:String(e)},{status:500})}}

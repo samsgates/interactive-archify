@@ -1,0 +1,23 @@
+{
+  "name": "@interactive-archify/mcp-server",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/server.js",
+  "bin": { "interactive-archify-mcp": "dist/server.js" },
+  "dependencies": {
+    "@interactive-archify/core": "workspace:*",
+    "@interactive-archify/ai": "workspace:*",
+    "@interactive-archify/repo-analyzer": "workspace:*",
+    "@interactive-archify/exporters": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "node -e \"console.log('mcp smoke covered by build')\""
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2"
+  }
+}

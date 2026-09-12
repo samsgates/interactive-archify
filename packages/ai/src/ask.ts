@@ -1,0 +1,10 @@
+import { shortestPath, reachable, relationshipsFor, type IAM } from '@interactive-archify/core'; import type { LLMProvider } from './provider.js';
+export interface ArchitectureAnswer { answer:string; actions:Array<{type:'focus'|'trace'|'highlight'|'show-layer';targets?:string[];path?:string[]}>; }
+function score(q:string,name:string,desc=''){const words=q.toLowerCase().split(/\W+/).filter(x=>x.length>2); const hay=(name+' '+desc).toLowerCase(); return words.reduce((n,w)=>n+(hay.includes(w)?1:0),0)}
+export async function askArchitecture(iam:IAM,question:string,provider:LLMProvider|null):Promise<ArchitectureAnswer>{
+  const ranked=iam.components.map(c=>({c,s:score(question,c.name,c.description)})).sort((a,b)=>b.s-a.s); const top=ranked.filter(x=>x.s>0).slice(0,4).map(x=>x.c);
+  if(!provider){if(top.length){const c=top[0]!; const rel=relationshipsFor(iam,c.id); return {answer:`${c.name}${c.description?`: ${c.description}`:''}. It has ${rel.length} authored connection${rel.length===1?'':'s'}. Confidence: ${c.confidence}.`,actions:[{type:'focus',targets:[c.id]},{type:'highlight',targets:rel.map(r=>r.id)}]};} return {answer:'I could not ground that question in the current architecture model.',actions:[]};}
+  const context={architecture:iam.architecture,components:iam.components,relationships:iam.relationships,flows:iam.flows,boundaries:iam.boundaries,evidence:iam.evidence,reviews:iam.reviews,likelyTargets:top.map(c=>c.id)};
+  const ans=await provider.generateStructured<ArchitectureAnswer>({schemaName:'ArchitectureAnswer',messages:[{role:'system',content:'Answer only from the provided architecture JSON. Never invent missing topology. Return JSON with answer and actions. Allowed actions: focus, trace, highlight, show-layer. Targets must be existing IDs.'},{role:'user',content:`Question: ${question}\nArchitecture: ${JSON.stringify(context)}`}],maxTokens:1200});
+  ans.actions=ans.actions.filter(a=>!(a.targets??[]).some(id=>!iam.components.some(c=>c.id===id)&&!iam.relationships.some(r=>r.id===id)&&!iam.layers.some(l=>l.id===id))); return ans;
+}

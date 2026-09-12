@@ -1,0 +1,4 @@
+import { spawn } from 'node:child_process'; import { promises as fs } from 'node:fs'; import os from 'node:os'; import path from 'node:path';
+export function isGitUrl(value:string){return /^https:\/\/github\.com\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+(?:\.git)?\/?$/.test(value)}
+function run(cmd:string,args:string[]){return new Promise<void>((resolve,reject)=>{const p=spawn(cmd,args,{stdio:['ignore','pipe','pipe']});let err='';p.stderr.on('data',d=>err+=d);p.on('error',reject);p.on('close',c=>c===0?resolve():reject(new Error(err||`${cmd} exited ${c}`)))});}
+export async function clonePublicRepository(url:string){if(!isGitUrl(url))throw new Error('Only HTTPS GitHub repository URLs are accepted by the built-in remote analyser. Clone other/private repositories locally.'); const dir=await fs.mkdtemp(path.join(os.tmpdir(),'interactive-archify-repo-'));await run('git',['clone','--depth','1','--filter=blob:limit=2m',url,dir]);return dir;}

@@ -1,0 +1,29 @@
+{
+  "name": "@interactive-archify/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "interactive-archify": "dist/cli.js",
+    "iarch": "dist/cli.js"
+  },
+  "main": "./dist/cli.js",
+  "dependencies": {
+    "@interactive-archify/core": "workspace:*",
+    "@interactive-archify/ai": "workspace:*",
+    "@interactive-archify/repo-analyzer": "workspace:*",
+    "@interactive-archify/story-engine": "workspace:*",
+    "@interactive-archify/exporters": "workspace:*",
+    "@interactive-archify/archify-adapter": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "node -e \"console.log('package tests covered by root suite')\"",
+    "start": "node dist/cli.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2"
+  }
+}

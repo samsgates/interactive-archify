@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Interactive Architecture Model",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "project",
+    "architecture",
+    "layers",
+    "components",
+    "relationships",
+    "boundaries",
+    "flows",
+    "scenes",
+    "stories",
+    "narrations",
+    "evidence",
+    "reviews",
+    "annotations",
+    "views"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "project": {
+      "type": "object"
+    },
+    "architecture": {
+      "type": "object"
+    },
+    "layers": {
+      "type": "array"
+    },
+    "components": {
+      "type": "array"
+    },
+    "relationships": {
+      "type": "array"
+    },
+    "boundaries": {
+      "type": "array"
+    },
+    "flows": {
+      "type": "array"
+    },
+    "scenes": {
+      "type": "array"
+    },
+    "stories": {
+      "type": "array"
+    },
+    "narrations": {
+      "type": "array"
+    },
+    "evidence": {
+      "type": "array"
+    },
+    "reviews": {
+      "type": "array"
+    },
+    "annotations": {
+      "type": "array"
+    },
+    "views": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": false
+}

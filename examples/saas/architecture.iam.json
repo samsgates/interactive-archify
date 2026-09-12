@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "project": {
+    "id": "saas-example",
+    "name": "SaaS Example"
+  },
+  "architecture": {
+    "title": "Multi-tenant SaaS",
+    "description": "Example interactive architecture",
+    "explanationLevel": "standard"
+  },
+  "layers": [
+    {
+      "id": "context",
+      "name": "Context",
+      "order": 1,
+      "visibleByDefault": true
+    },
+    {
+      "id": "experience",
+      "name": "Experience",
+      "order": 2,
+      "visibleByDefault": true
+    },
+    {
+      "id": "application",
+      "name": "Application",
+      "order": 3,
+      "visibleByDefault": true
+    },
+    {
+      "id": "services",
+      "name": "Services",
+      "order": 4,
+      "visibleByDefault": true
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "order": 5,
+      "visibleByDefault": true
+    },
+    {
+      "id": "messaging",
+      "name": "Messaging",
+      "order": 6,
+      "visibleByDefault": true
+    },
+    {
+      "id": "infrastructure",
+      "name": "Infrastructure",
+      "order": 7,
+      "visibleByDefault": false
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "order": 8,
+      "visibleByDefault": false
+    },
+    {
+      "id": "observability",
+      "name": "Observability",
+      "order": 9,
+      "visibleByDefault": false
+    }
+  ],
+  "components": [
+    {
+      "id": "user",
+      "name": "User",
+      "type": "user",
+      "layer": "context",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "web",
+      "name": "Next.js Web",
+      "type": "frontend",
+      "layer": "experience",
+      "technology": "Next.js",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "api",
+      "name": "API Gateway",
+      "type": "gateway",
+      "layer": "application",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "auth",
+      "name": "Auth Service",
+      "type": "service",
+      "layer": "services",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "orders",
+      "name": "Order Service",
+      "type": "service",
+      "layer": "services",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "redis",
+      "name": "Redis",
+      "type": "cache",
+      "layer": "data",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "postgres",
+      "name": "PostgreSQL",
+      "type": "database",
+      "layer": "data",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "type": "external-service",
+      "layer": "context",
+      "confidence": "hypothetical"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "user-web",
+      "source": "user",
+      "target": "web",
+      "protocol": "HTTPS",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "web-api",
+      "source": "web",
+      "target": "api",
+      "protocol": "HTTPS",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "api-auth",
+      "source": "api",
+      "target": "auth",
+      "protocol": "HTTPS",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "api-orders",
+      "source": "api",
+      "target": "orders",
+      "protocol": "HTTPS",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "auth-redis",
+      "source": "auth",
+      "target": "redis",
+      "protocol": "Redis",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "orders-db",
+      "source": "orders",
+      "target": "postgres",
+      "protocol": "SQL",
+      "confidence": "hypothetical"
+    },
+    {
+      "id": "orders-stripe",
+      "source": "orders",
+      "target": "stripe",
+      "protocol": "HTTPS",
+      "confidence": "hypothetical"
+    }
+  ],
+  "boundaries": [],
+  "flows": [
+    {
+      "id": "checkout",
+      "name": "Checkout Flow",
+      "confidence": "hypothetical",
+      "steps": [
+        {
+          "componentId": "user"
+        },
+        {
+          "componentId": "web",
+          "relationshipId": "user-web"
+        },
+        {
+          "componentId": "api",
+          "relationshipId": "web-api"
+        },
+        {
+          "componentId": "orders",
+          "relationshipId": "api-orders"
+        },
+        {
+          "componentId": "stripe",
+          "relationshipId": "orders-stripe"
+        }
+      ]
+    }
+  ],
+  "scenes": [],
+  "stories": [],
+  "narrations": [],
+  "evidence": [],
+  "reviews": [],
+  "annotations": [],
+  "views": []
+}

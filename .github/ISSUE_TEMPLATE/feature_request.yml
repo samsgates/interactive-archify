@@ -1,0 +1,10 @@
+name: Feature request
+description: Suggest an improvement
+body:
+  - type: textarea
+    id: usecase
+    attributes: { label: Use case }
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes: { label: Proposal }

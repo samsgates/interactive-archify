@@ -1,0 +1,2 @@
+import { createTTSProvider } from '@interactive-archify/narration';
+export async function POST(req:Request){try{const {text,voice}=await req.json();const provider=createTTSProvider(process.env);if(!provider)return Response.json({provider:'browser'},{status:409});const out=await provider.synthesize({text:String(text??''),voice});return new Response(out.audio,{headers:{'content-type':out.contentType,'x-tts-provider':provider.name}})}catch(e){return Response.json({error:e instanceof Error?e.message:String(e)},{status:500})}}
